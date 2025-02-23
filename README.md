@@ -1,2 +1,2 @@
 # Taskify
-A To Do web applocation assesment
+A To Do web application assesment

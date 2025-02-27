@@ -6,7 +6,7 @@ const Task = {
             id INT AUTO_INCREMENT PRIMARY KEY,
             title VARCHAR(255) NOT NULL,
             description TEXT,
-            status ENUM('pending', 'in_progress', 'completed') DEFAULT 'pending',
+            status ENUM('pending', 'completed') DEFAULT 'pending',
             dueDate DATETIME,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -33,9 +33,9 @@ const Task = {
         return task.length > 0 ? task[0] : null;
     },
 
-    update: async function (id, title, description, status, dueDate) {
-        const sql = `UPDATE task SET title = ?, description = ?, status = ?, dueDate = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?`;
-        const [result] = await db.promise().query(sql, [title, description, status, dueDate, id]);
+    update: async function (id, status) {
+        const sql = `UPDATE task SET status = ? WHERE id = ?`;
+        const [result] = await db.promise().query(sql, [status, id]);
         return result.affectedRows;
     },
 

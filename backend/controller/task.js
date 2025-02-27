@@ -34,8 +34,8 @@ const getTaskById = async (req, res) => {
 
 const updateTask = async (req, res) => {
     try {
-        const { title, description, status, dueDate } = req.body;
-        const updatedRows = await Task.update(req.params.id, title, description, status, dueDate);
+        const { status } = req.body;
+        const updatedRows = await Task.update(req.params.id, status);
         if (updatedRows === 0) return res.status(404).json({ message: 'Task not found' });
 
         res.json({ message: 'Task updated successfully' });
